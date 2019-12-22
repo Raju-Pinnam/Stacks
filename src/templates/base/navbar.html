@@ -1,0 +1,40 @@
+{% load static %}
+{% url 'home_detail:home_detail_home' as home_url %}
+{% url 'home_detail:home_detail_contact' as contact_utl %}
+{% url 'account:account_login' as login_url %}
+{% url 'account:account_logout' as logout_url %}
+{% url 'account:account_register' as register_url %}
+
+
+<nav class="navbar navbar-expand-lg bg-dark ">
+    <div class="container">
+        <div class="navbar-brand text-white">
+            Stacks
+        </div>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ home_url }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ contact_utl }}">Contact</a>
+            </li>
+
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ logout_url }}">
+                        Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ login_url }}">
+                        Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ register_url }}">
+                        Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+
+</nav>

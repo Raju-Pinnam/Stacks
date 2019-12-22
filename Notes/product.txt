@@ -1,0 +1,30 @@
+--> Product (say samsung galaxy a70) as mobile
+      |   |
+      |  dependencies
+      |         |
+      |         subcategory (say mobiles)
+      |              |
+      |              category ( say electronic device)
+      |
+      |
+      details
+            |
+            contains
+                  |
+                  price (original price, discounted price, how much discount)
+                  details ( brand, color, ram, size, rom, battery, processor, dimensions)
+                  description (general description)
+
+      categories [ electronics, fashion, furniture, sports & stationery & food & others ]
+
+      sub-category --> electronics
+                                |--> tvs
+                                |--> washing machines
+                                |--> mobiles
+                                |--> mobile accessories
+                                |--> laptops
+
+                   --> fashion
+                            |--> men
+                            |--> women
+                            |--> kids
