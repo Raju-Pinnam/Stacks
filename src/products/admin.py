@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import MobileProduct, ShirtProduct
+from .models import Product
 
-admin.site.register(MobileProduct)
-admin.site.register(ShirtProduct)
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['__str__', 'category']
+    search_fields = ['category', ]
+
+    class Meta:
+        model = Product
+
+
+admin.site.register(Product, ProductAdmin)

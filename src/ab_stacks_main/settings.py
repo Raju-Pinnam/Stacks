@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'home_details',
+    'category_sub',
     'products',
 
 ]
