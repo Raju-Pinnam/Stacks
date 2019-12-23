@@ -7,12 +7,12 @@ User = get_user_model()
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email',
                              widget=forms.EmailInput(attrs={
-                                 'class': 'form-control',
-                                 'placeholder': 'Email Address'
+                                 'class': 'form-control my-2 p-2 input',
+                                 'placeholder': 'Email'
                              }))
     password = forms.CharField(label='Password',
                                widget=forms.PasswordInput(attrs={
-                                   'class': 'form-control',
+                                   'class': 'form-control my-2 p-2 input',
                                    'placeholder': 'Password',
                                }))
 
@@ -26,23 +26,23 @@ class LoginForm(forms.Form):
 class RegisterForm(forms.Form):
     email = forms.EmailField(label='Email',
                              widget=forms.EmailInput(attrs={
-                                 'class': 'form-control',
-                                 'placeholder': 'Email Address'
+                                 'class': 'form-control my-1 p-2 input',
+                                 'placeholder': 'Email'
                              }))
     username = forms.CharField(label='Username',
                                widget=forms.TextInput(attrs={
-                                   'class': 'form-control',
+                                   'class': 'form-control my-1 p-2 input',
                                    'placeholder': 'Username',
                                }))
     password = forms.CharField(label='Password',
                                widget=forms.PasswordInput(attrs={
-                                   'class': 'form-control',
+                                   'class': 'form-control my-1 p-2 input',
                                    'placeholder': 'Password',
                                }))
     password2 = forms.CharField(label='Confirm-Password',
                                 widget=forms.PasswordInput(attrs={
-                                    'class': 'form-control',
-                                    'placeholder': 'Password',
+                                    'class': 'form-control my-1 p-2 input',
+                                    'placeholder': 'Confirm-Password',
                                 }))
 
     def clean(self):

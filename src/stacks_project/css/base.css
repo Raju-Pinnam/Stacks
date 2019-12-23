@@ -1,3 +1,50 @@
 /* nav bar */
 
 /* end of nav bar */
+
+/* Modal */
+.lr-form {
+    background: #525252;
+}
+
+.input {
+    background: transparent;
+    border-color: transparent;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    color: #fff;
+    transition: all .8s;
+}
+
+.input:focus {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    color: #fff;
+    border-bottom: 2px solid #f5593d;
+}
+
+.submit-button{
+    background-color: #f5593d;
+    color: #eee;
+    transition: all .3s;
+}
+.submit-button:hover{
+    background-color: #f9793d;
+    transform: translateY(-3px);
+}
+.label{
+    color: #777;
+    display: block;
+    margin-top: -70px;
+    margin-left: 4px;
+    font-size: 13px;
+    transition: all .3s;
+}
+.input:placeholder-shown + .label{
+    transform: translate(20px, 20px);
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Modal end */

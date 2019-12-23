@@ -20,13 +20,21 @@ def login_page_fbv(request):
         if user is not None:
             login(request, user)
             return redirect('home_detail:home_detail_home')
-    return render(request, 'accounts/login_register.html', context)
+        else:
+            context['login_form'] = LoginForm()
+            qs = User.objects.filter(email=email)
+            raise ValueError(login_form.errors)
+    else:
+        context['login_form'] = LoginForm()
+
+    return render(request, 'base/navbar.html', context)
+    # return render(request, 'accounts/login_register.html', context)
 
 
 def logout_fbv(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect('account:account_login')
+        return redirect('/')
 
 
 def register_fbv(request):
@@ -41,8 +49,8 @@ def register_fbv(request):
         username = register_form.cleaned_data.get('username')
         password = register_form.cleaned_data.get('password')
         new_user = User.objects.create_user(email=email, username=username, password=password)
-        print(new_user)
-    return render(request, 'accounts/login_register.html', context)
+        # print(new_user)
+    return render(request, 'base/navbar.html', context)
 
 # class LoginPlace(TemplateView):
 #     template_name = 'accounts/login_register.html'
