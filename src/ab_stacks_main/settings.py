@@ -38,10 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    # created apps
     'accounts',
     'home_details',
     'category_sub',
     'products',
+    'product_details',
+    'product_details.mobiles',
+    'product_details.laptops',
 
 ]
 

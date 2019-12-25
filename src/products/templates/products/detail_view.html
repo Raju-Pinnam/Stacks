@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    {{ object }}<br>
+    {{ object_details.description }}<br><br>
+    <img src="{{ object_details.main_image.url }}" alt="">
+
+
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate, get_user_model
+from django.core.exceptions import ValidationError
 
 from .forms import LoginForm, RegisterForm
 
@@ -21,9 +22,8 @@ def login_page_fbv(request):
             login(request, user)
             return redirect('home_detail:home_detail_home')
         else:
-            context['login_form'] = LoginForm()
-            qs = User.objects.filter(email=email)
-            raise ValueError(login_form.errors)
+            context['login_form'] = LoginForm()  # TODO to run login correctly
+            return render(request, 'accounts/login_register.html', context)
     else:
         context['login_form'] = LoginForm()
 
