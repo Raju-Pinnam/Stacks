@@ -1,6 +1,6 @@
-from itertools import chain
-
+from django.db.models import Q
 from django.db import models
+from django.utils.text import slugify
 
 
 class ProductQuerySet(models.query.QuerySet):
@@ -11,15 +11,12 @@ class ProductQuerySet(models.query.QuerySet):
             return obj
         return None
 
-    def get_object_details(self, obj_slug):
-        mobile_search = self.filter(mobile__slug=obj_slug)
-        laptop_search = self.filter(laptop__slug=obj_slug)
-        query_chain = chain(mobile_search, laptop_search)
-        qs = sorted(query_chain)
-        if len(qs) > 0:
-            object_details = qs[0]
-            return object_details
-        return None
+    def search(self, query):
+        sl_query = slugify(query)
+        lookups = (Q(title__icontains=query) | Q(description__icontains=query) |
+                   Q(mobile__brand__icontains=query) | Q(mobile__ram__icontains=query) |
+                   Q(category__category_keywords__icontains=query))
+        return self.filter(lookups).distinct()
 
 
 class ProductManager(models.Manager):
@@ -29,5 +26,5 @@ class ProductManager(models.Manager):
     def get_by_slug(self, slug):
         return self.get_queryset().get_by_slug(slug)
 
-    def get_object_details(self, obj_slug):
-         return self.get_queryset().get_object_details(obj_slug)
+    def search(self, query):
+        return self.get_queryset().search(query)

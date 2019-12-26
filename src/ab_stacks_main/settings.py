@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # created apps
     'accounts',
     'home_details',
+    'search',
     'category_sub',
     'products',
     'product_details',
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'accounts.context_processors.login_context',
+                'category_sub.context_processors.category_list'
             ],
         },
     },
@@ -122,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

@@ -17,7 +17,6 @@ def unique_slug_generator(instance, new_slug=None):
         slug = f'' \
                f'{slugify(instance.name)}' \
                f'-{date.day}-{date.month}-{date.year}' \
-               f'-{random_string_generator(size=10)}' \
                f'{random_string_generator(size=10)}'[:100]
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(slug=slug).exists()
@@ -48,14 +47,20 @@ def upload_image_path(instance, file_name):
 
 # signal functions
 def post_save_details_save_data_to_product_model(sender, instance, *args, **kwargs):
-    obj, new_obj = Product.objects.get_or_create(title=instance.name)
+    obj, new_obj = Product.objects.get_or_create(title=instance.name, color=instance.color,
+                                                 initial_price=instance.initial_price)
     obj.title = instance.name
-    obj.description = instance.description
     obj.slug = instance.slug
     obj.category = SubCategory.objects.get(name=sender.__name__)
+    obj.description = instance.description
+    obj.color = instance.color
+    obj.initial_price = instance.initial_price
+    obj.discount = instance.discount
+    obj.final_price = instance.final_price
     obj.main_image = instance.main_image
-    obj.is_active = instance.is_active
     obj.is_upcoming = instance.is_upcoming
+    obj.is_active = instance.is_active
+
     obj.save()
     if instance.product_name is None:
         instance.product_name = obj

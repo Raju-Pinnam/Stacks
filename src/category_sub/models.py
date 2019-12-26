@@ -22,4 +22,4 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=120, default='NONE')
 
     def __str__(self):
-        return f'{self.parent_category} --> {self.name}'
+        return self.name

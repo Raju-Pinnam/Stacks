@@ -26,10 +26,17 @@
 
     <div class="container-md">
         <div class="row">
+            <div class="col-8 mx-auto my-2 text-muted h5">
+                Searched for "{{ request.GET.q }}"
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-8 mx-auto mt-1">
                 {% for object in object_list %}
                     <a href="{{ object.get_absolute_url }}" class="product-link">
-                     
+
                         <div class="row list-block justify-content-center">
                             <div class="col-2 p-2 mb-1">
                                 <div class="img-box">

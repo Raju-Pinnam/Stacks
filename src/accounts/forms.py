@@ -27,7 +27,8 @@ class RegisterForm(forms.Form):
     email = forms.EmailField(label='Email',
                              widget=forms.EmailInput(attrs={
                                  'class': 'form-control my-1 p-2 input',
-                                 'placeholder': 'Email'
+                                 'placeholder': 'Email',
+                                 'id': 'register-email-id',
                              }))
     username = forms.CharField(label='Username',
                                widget=forms.TextInput(attrs={
@@ -38,6 +39,7 @@ class RegisterForm(forms.Form):
                                widget=forms.PasswordInput(attrs={
                                    'class': 'form-control my-1 p-2 input',
                                    'placeholder': 'Password',
+                                   'id': 'register-password-id'
                                }))
     password2 = forms.CharField(label='Confirm-Password',
                                 widget=forms.PasswordInput(attrs={

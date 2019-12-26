@@ -12,6 +12,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=120, null=True, blank=True)
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    color = models.CharField(max_length=120, blank=True, null=True)
     initial_price = models.DecimalField(max_digits=20, decimal_places=2, default=0.00, null=True, blank=True)
     discount = models.DecimalField(max_digits=4, decimal_places=2, default=0.00, null=True, blank=True)
     final_price = models.DecimalField(max_digits=20, decimal_places=2, default=0.00, null=True, blank=True)

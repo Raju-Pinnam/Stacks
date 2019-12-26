@@ -2,11 +2,31 @@
 
 
 {% block content %}
-
-    {{ object }}<br>
-    {{ object_details.description }}<br><br>
-    <img src="{{ object_details.main_image.url }}" alt="">
-
-
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="{{ object.main_image.url }}" alt="" class="img-fluid">
+                    </div>
+                    {% if object.category.name == 'Mobile' %}
+                        {% with obj_details=object.mobile_set.get %}
+                            <div class="col-8">
+                                 <h4 class="font-weight-bold">{{ obj_details.name }}
+                                     <span class="small text-muted">({{ obj_details.color }})</span>
+                                 </h4>
+                            </div>
+                        {% endwith %}
+                    {% elif object.category.name == 'Laptop' %}
+                        {% with obj_details=object.laptop_set.get %}
+                            <div class="col-8">
+                                {{ obj_details.ram }}
+                            </div>
+                        {% endwith %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
