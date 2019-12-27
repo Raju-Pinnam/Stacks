@@ -5,6 +5,7 @@
 {% url 'account:account_logout' as logout_url %}
 {% url 'account:account_register' as register_url %}
 {% url 'products:list' as products_url %}
+{% url 'cart:home' as cart_home_url %}
 
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg fixed-top nav-menu">
@@ -45,7 +46,13 @@
                     </li>
                 {% endif %}
                 <li class="nav-item m-2 menu-item">
-                    <a class="nav-link text-white" href="#">Cart</a>
+                    <a class="nav-link text-white" href="{{ cart_home_url }}">
+                        {% if cart_item_count > 0 %}
+                            {{ cart_item_count }} Cart
+                        {% else %}
+                            Cart
+                        {% endif %}
+                    </a>
                 </li>
             </ul>
 

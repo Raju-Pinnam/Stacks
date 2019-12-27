@@ -10,8 +10,10 @@ from product_details.utils import (post_save_details_save_data_to_product_model,
 class Laptop(models.Model):
     product_name = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=120)
+    brand = models.CharField(max_length=120, blank=True, null=True)
     slug = models.SlugField(max_length=120, unique=True, null=True, blank=True)
     color = models.CharField(max_length=120)
+    internal_storage = models.CharField(max_length=120, null=True, blank=True)
     ram = models.FloatField(max_length=120, blank=True, null=True, default=1.0)
     width = models.FloatField(max_length=120, default=0.0)
     description = models.TextField(blank=True, null=True)
@@ -21,8 +23,13 @@ class Laptop(models.Model):
     right_side_image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     back_side_image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
+    initial_price = models.DecimalField(max_digits=10, default=0.00, decimal_places=2, blank=True, null=True)
+    discount = models.DecimalField(max_digits=10, default=0.00, decimal_places=2, blank=True, null=True)
+    final_price = models.DecimalField(max_digits=10, default=0.00, decimal_places=2, blank=True, null=True)
+
     is_upcoming = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.product_name)

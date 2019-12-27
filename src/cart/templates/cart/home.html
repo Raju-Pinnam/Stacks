@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-8 mx-auto">
+                {% if cart.products.count > 0 %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th> Name</th>
+                            <th> Price</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in cart.products.all %}
+                            <tr>
+                                <td>{{ product.title }}</td>
+                                <td>{{ product.final_price }}</td>
+                                <td>
+                                    {% include 'products/snippets/cart_update.html' with object=product cart=cart in_cart='in_cart' %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="1"></td>
+                            <td>SubTotal: {{ cart.subtotal }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"></td>
+                            <td>Total: {{ cart.total }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                 {% else %}
+                    <h4 class="display-4">Your cart is empty</h4>
+                {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

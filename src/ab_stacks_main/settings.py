@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'home_details',
     'search',
+    'cart',
     'category_sub',
     'products',
     'product_details',
@@ -77,7 +78,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'accounts.context_processors.login_context',
-                'category_sub.context_processors.category_list'
+                'category_sub.context_processors.category_list',
+                'cart.context_processors.cart_context',
             ],
         },
     },

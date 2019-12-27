@@ -3,6 +3,8 @@ from django.views.generic import ListView, DetailView
 
 from .models import Product
 
+from cart.models import Cart
+
 
 class ProductListView(ListView):
     template_name = 'products/list_view.html'
@@ -15,6 +17,6 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
-        slug = self.kwargs.get('slug')
-        obj = Product.objects.get_by_slug(slug)
+        cart_obj, is_cart_created = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
         return context

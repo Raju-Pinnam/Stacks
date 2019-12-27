@@ -47,8 +47,8 @@ def upload_image_path(instance, file_name):
 
 # signal functions
 def post_save_details_save_data_to_product_model(sender, instance, *args, **kwargs):
-    obj, new_obj = Product.objects.get_or_create(title=instance.name, color=instance.color,
-                                                 initial_price=instance.initial_price)
+    obj, new_obj = Product.objects.get_or_create(title=instance.name)
+    # , color=instance.color, initial_price=instance.initial_price
     obj.title = instance.name
     obj.slug = instance.slug
     obj.category = SubCategory.objects.get(name=sender.__name__)
