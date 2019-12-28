@@ -15,8 +15,10 @@ def m2m_cart_subtotal_receiver(sender, instance, action, *args, **kwargs):
 
 def pre_save_total_receiver(sender, instance, *args, **kwargs):
     if instance.subtotal > 0:
-        print('Hello')
-        instance.total = float(instance.subtotal) + ((float(instance.subtotal) * float(instance.tax)) / 100)
+        if instance.tax == 1:
+            instance.total = float(instance.subtotal)
+        else:
+            instance.total = float(instance.subtotal) + ((float(instance.subtotal) * float(instance.tax)) / 100)
     else:
         instance.total = 0
 

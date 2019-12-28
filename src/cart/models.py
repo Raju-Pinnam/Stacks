@@ -14,7 +14,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     products = models.ManyToManyField(Product, blank=True)
     subtotal = models.FloatField(max_length=120, default=0.0)
-    tax = models.FloatField(max_length=120, default=5.0, validators=[validate_tax])
+    tax = models.FloatField(max_length=120, default=1.0, validators=[validate_tax])
     total = models.FloatField(max_length=120, default=0.0)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -23,6 +23,17 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    def cart_have_order(self):
+        obj = self.order_set.exists()
+        return obj
+
+    def cart_order_status(self):
+        if self.cart_have_order():
+            obj_status = self.order_set.last().status
+        else:
+            obj_status = 'No Order'
+        return obj_status
 
 
 m2m_changed.connect(m2m_cart_subtotal_receiver, sender=Cart.products.through)

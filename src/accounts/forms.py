@@ -4,6 +4,20 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+class GuestForm(forms.Form):
+    email = forms.EmailField(label='Email',
+                             widget=forms.EmailInput(attrs={
+                                 'class': 'form-control my-2 p-2 input',
+                                 'placeholder': 'Email'
+                             }))
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not 'gmail.com' in email:
+            raise forms.ValidationError('Please enter correct email')
+        return email
+
+
 class LoginForm(forms.Form):
     email = forms.EmailField(label='Email',
                              widget=forms.EmailInput(attrs={

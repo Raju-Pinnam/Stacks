@@ -1,5 +1,19 @@
 $(document).ready(function () {
 
+    let loginDiv = $('.log');
+    let registerDiv = $('.reg');
+
+    $('.toggler-button').click(function () {
+        if (loginDiv.css('display') === 'none') {
+            loginDiv.show();
+            registerDiv.hide()
+        }
+        if (registerDiv.css('display') === 'none') {
+            registerDiv.show();
+            loginDiv.hide()
+        }
+    });
+
     $('.nav-button-tog').click(function () {
         $('.nav-button-tog').toggleClass('change')
     });
@@ -10,12 +24,7 @@ $(document).ready(function () {
     // });
 
     //Toggling between login and register forms
-    let loginDiv = $('.log');
-    let registerDiv = $('.reg');
-    registerDiv.hide();
-    $('.toggler-button').on('click', function () {
-        $( loginDiv, registerDiv ).toggle();
-    });
+
     // End Of toggling
 
 });
