@@ -1,6 +1,6 @@
 {% load static %}
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
@@ -8,6 +8,119 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
-<script src="https://kit.fontawesome.com/e78da1fef3.js" ></script>
+<script src="https://kit.fontawesome.com/e78da1fef3.js"></script>
 
 <script src="{% static 'js/base.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        let loginDiv = $('.login');
+        let registerDiv = $('.regis');
+        let toggleLogRegButton = $('.m-tog-button');
+        registerDiv.hide();
+        toggleLogRegButton.click(function () {
+            $('.login, .regis').toggle()
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        let productFormUpdate = $('.form-product-update-ajax');
+        productFormUpdate.submit(function (event) {
+            event.preventDefault();
+            let thisForm = $(this);
+            let actionEndPoint = thisForm.attr('action');
+            let httpMethod = thisForm.attr('method');
+
+            let formData = thisForm.serialize();
+            $.ajax({
+                url: actionEndPoint,
+                method: httpMethod,
+                data: formData,
+                success: function (data) {
+                    let buttonProductUpdate = thisForm.find('.submit-product-update');
+                    if (data.added) {
+                        buttonProductUpdate.html('' +
+                            ' <button type="submit" ' +
+                            'class="btn btn-block py-3 text-dark text-capitalize font-weight-bold cart-btn-re">' +
+                            'Remove' +
+                            '</button>'
+                        );
+                    } else {
+                        buttonProductUpdate.html('' +
+                            ' <button type="submit" ' +
+                            'class="btn btn-block py-3 text-dark text-capitalize font-weight-bold cart-btn-ad">' +
+                            'Add to cart' +
+                            '</button>');
+                    }
+                    let navbarCartCount = $('.navbar-cart-count');
+                    navbarCartCount.text(data.cart_item_count);
+                    let currentPath = window.location.href;
+                    if (currentPath.indexOf('cart') !== -1) {
+                        updateCart()
+                    }
+                },
+                error: function (errorData) {
+                    console.log(errorData)
+                },
+            });
+        });
+
+        function updateCart() {
+            let cartTable = $('.cart-table');
+            let cartBody = cartTable.find('.cart-body');
+            let cartProduct = cartBody.find('.cart-product');
+            let currentUrl = window.location.href;
+            let updateCartUrl = '/cart/api/';
+            let updateCartMethod = 'GET';
+            let data = {};
+            $.ajax({
+                url: updateCartUrl,
+                method: updateCartMethod,
+                data: data,
+                success: function (data) {
+                    let hiddenFormProductRemove = $('.cart-item-remove-form');
+                    if (data.product.length > 0) {
+                        cartProduct.html('');
+                        $.each(data.product, function (index, value) {
+                            let newCartItemRemoveClone = hiddenFormProductRemove.clone();
+                            newCartItemRemoveClone.css('display', 'block');
+                            newCartItemRemoveClone.find('.catt-item-product-id').val(value.id);
+                            cartBody.prepend('' +
+                                ' <tr class="cart-product">\n' +
+                                '<td><a href="' + value.url + '"> ' + value.name + '</a></td>\n' +
+                                '<td> ' + value.price + '</td>\n' +
+                                '<td>'+ newCartItemRemoveClone.html() + '</td>' +
+                                '</tr>');
+                        });
+                        cartBody.find('.cart-subtotal').text(data.cart_subtotal);
+                        cartBody.find('.cart-total').text(data.cart_total);
+                    } else {
+                        window.location.href = currentUrl
+                    }
+                },
+                error: function (errorData) {
+                    console.log(errorData)
+                }
+            })
+        }
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

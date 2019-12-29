@@ -1,14 +1,14 @@
 from .models import Cart
 
 
-def cart_context(request):
-    cart_id = request.session.get('cart_id')
-    try:
-        cart_obj = Cart.objects.get(id=cart_id)
-        count = cart_obj.products.count()
-    except:
+def cart_product_iem_count(request):
+    cart_obj, is_new = Cart.objects.new_or_get(request)
+    if is_new:
         count = 0
+    else:
+        count = cart_obj.products.count()
+
     context = {
-        'cart_item_count': count,
+        'count_item_count': count
     }
     return context

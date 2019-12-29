@@ -82,7 +82,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'accounts.context_processors.login_context',
                 'category_sub.context_processors.category_list',
-                'cart.context_processors.cart_context',
+                'cart.context_processors.cart_product_iem_count',
             ],
         },
     },

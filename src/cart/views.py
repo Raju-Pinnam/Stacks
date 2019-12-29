@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
@@ -9,6 +10,24 @@ from orders.models import Order
 from accounts.forms import GuestForm
 from addresses.forms import AddressForm
 from addresses.models import Address
+
+
+def cart_api_view(request):
+    cart_obj, is_cart_created = Cart.objects.new_or_get(request)
+    products = [
+        {
+            'id': x.id,
+            'url': x.get_absolute_url(),
+            'name': x.title,
+            'price': x.final_price}
+        for x in cart_obj.products.all()
+    ]
+    cart_data = {
+        'product': products,
+        'cart_subtotal': cart_obj.subtotal,
+        'cart_total': cart_obj.total,
+    }
+    return JsonResponse(cart_data)
 
 
 class CartHome(TemplateView):
@@ -33,8 +52,18 @@ def cart_update(request):
         cart_obj, is_cart_created = Cart.objects.new_or_get(request)
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
+            is_added = False
         else:
             cart_obj.products.add(product_obj)
+            is_added = True
+        request.session['cart_product_count'] = cart_obj.products.count()
+        if request.is_ajax():
+            json_data = {
+                'added': is_added,
+                'removed': not is_added,
+                'cart_item_count': cart_obj.products.count(),
+            }
+            return JsonResponse(json_data)
     return redirect('cart:home')
 
 
@@ -64,6 +93,7 @@ def checkout_home(request):
         if is_payment_done:
             order_obj.mark_paid()
             del request.session['cart_id']
+            request.session['cart_product_count'] = 0
             return redirect('cart:success')
     context = {
         "object": order_obj,

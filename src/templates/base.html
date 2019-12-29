@@ -19,16 +19,6 @@
 {% endblock content %}
 
 {% include 'base/js.html' %}
-<script>
-    $(document).ready(function () {
-        let loginDiv = $('.login');
-        let registerDiv = $('.regis');
-        let toggleLogRegButton = $('.m-tog-button');
-         registerDiv.hide();
-        toggleLogRegButton.click(function () {
-            $('.login,.regis').toggle()
-        });
-    })
-</script>
+
 </body>
 </html>

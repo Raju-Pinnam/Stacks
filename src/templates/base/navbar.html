@@ -47,11 +47,8 @@
                 {% endif %}
                 <li class="nav-item m-2 menu-item">
                     <a class="nav-link text-white" href="{{ cart_home_url }}">
-                        {% if cart_item_count > 0 %}
-                            {{ cart_item_count }} Cart
-                        {% else %}
-                            Cart
-                        {% endif %}
+                        <span class="navbar-cart-count">{{ count_item_count }}</span>
+                        <i class="fa fa-shopping-cart text-warning"></i>
                     </a>
                 </li>
             </ul>
@@ -68,7 +65,8 @@
             <div class="row">
                 <div class="col-4 bg-info p-4 text-center">
                     <i class="fa fa-cart-plus fa-4x text-white"></i>
-                    <h3 class="display-4 my-5"><span class="login">Login </span><span class="regis">Register </span></h3>
+                    <h3 class="display-4 my-5"><span class="login">Login </span><span class="regis">Register </span>
+                    </h3>
                 </div>
                 <div class="col-8 lr-form">
                     <button class="close text-white" data-dismiss="modal">&times;</button>

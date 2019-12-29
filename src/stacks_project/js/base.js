@@ -1,18 +1,5 @@
 $(document).ready(function () {
 
-    let loginDiv = $('.log');
-    let registerDiv = $('.reg');
-
-    $('.toggler-button').click(function () {
-        if (loginDiv.css('display') === 'none') {
-            loginDiv.show();
-            registerDiv.hide()
-        }
-        if (registerDiv.css('display') === 'none') {
-            registerDiv.show();
-            loginDiv.hide()
-        }
-    });
 
     $('.nav-button-tog').click(function () {
         $('.nav-button-tog').toggleClass('change')

@@ -33,13 +33,13 @@
 
                         </div>
                         <div class="row mt-4">
-                            <div class="col-5">
-                                <button class="btn btn-block py-3 text-dark text-capitalize font-weight-bold cart-btn-go">
+                            <div class="col-lg-5 m-lg-0 m-2 ">
+                                <a href="{% url 'cart:home' %}" class="btn btn-block py-3 text-dark text-capitalize font-weight-bold cart-btn-go">
                                     Go to
                                     cart
-                                </button>
+                                </a>
                             </div>
-                            <div class="col-5">
+                            <div class="col-lg-5 m-lg-0 m-2 ">
                                 {% include 'products/snippets/cart_update.html' with cart=cart object=object %}
                             </div>
                         </div>

@@ -18,7 +18,26 @@
         .product-link, .product-link:hover {
             text-decoration: none !important;
         }
+
+        .cart-btn-ad, .cart-btn-go, .cart-btn-re {
+            border-radius: 0;
+        }
+
+        .cart-btn-go {
+            background-color: rgba(88, 225, 92, 0.91);
+        }
+
+        .cart-btn-ad {
+            background-color: rgba(202, 193, 56, 0.91);
+        }
+
+        .cart-btn-re {
+            background-color: rgba(252, 95, 41, 0.91);
+        }
     </style>
+
+
+
 
 {% endblock %}
 
@@ -30,8 +49,8 @@
                 {% for object in object_list %}
 
                     <a href="{{ object.get_absolute_url }}" class="product-link">
-                     
-                        <div class="row list-block justify-content-center">
+
+                        <div class="row list-block mt-4 justify-content-center">
                             <div class="col-2 p-2 mb-1">
                                 <div class="img-box">
                                     {% if object.main_image %}
@@ -42,8 +61,17 @@
                             <div class="col-6">
                                 {% include 'products/snippets/in_list_product_details.html' with object=object %}
                             </div>
-                            <div class="col-3 text-dark h4">
-                                {{ object.initial_price }}
+
+                            <div class="col-3">
+                                <div class="row">
+                                    <div class="col-12 mt-4 text-muted">
+                                        Price :<span class="font-weight-bold"> {{ object.initial_price }}</span>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                         {% include 'products/snippets/cart_update.html' with cart=cart object=object %}
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </a>
