@@ -11,6 +11,7 @@ urlpatterns = [
     path('search/', include(('search.urls', 'search'), namespace='search')),
     path('cart/', include(('cart.urls', 'cart'), namespace='cart')),
     path('orders/', include(('orders.urls', 'orders'), namespace='orders')),
+    path('billing/', include(('billing.urls', 'billing'), namespace='billing')),
     path('address/', include(('addresses.urls', 'addresses'), namespace='addresses')),
 ]
 
